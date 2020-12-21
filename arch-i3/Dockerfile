@@ -29,15 +29,15 @@ RUN pacman -Syu --noconfirm \
 RUN pacman -Syu --noconfirm \
       supervisor
 
+RUN mkdir /app
 RUN groupadd admin && \
-    useradd -m -g admin admin
+    useradd -m -d /app -g admin admin
 RUN echo "admin ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/admin
 
-RUN mkdir /app
 RUN chown -R admin:admin /app
 
 USER admin
-WORKDIR /home/admin
+WORKDIR /app
 
 RUN mkdir .gnupg && \
     touch .gnupg/gpg.conf && \
@@ -58,7 +58,7 @@ WORKDIR /app
 RUN pacman -Syu --noconfirm \
       i3
 
-ENV HOME=/root \
+ENV HOME=/app \
     LANG=en_GB.UTF-8 \
     LANGUAGE=en_GB.UTF-8 \
     DISPLAY=:0.0 \
@@ -66,6 +66,7 @@ ENV HOME=/root \
     DISPLAY_HEIGHT=600
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
+COPY .xinitrc /app/.xinitrc
 CMD ["/usr/bin/supervisord","-c", "/etc/supervisor/supervisord.conf"]
 EXPOSE 9873
 
