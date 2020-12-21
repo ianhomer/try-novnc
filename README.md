@@ -1,4 +1,7 @@
-# Try novnc
+# Try noVNC
+
+Use [noVNC](https://novnc.com) to interact with windows manager in a docker
+container.
 
 ## tl;dr
 
