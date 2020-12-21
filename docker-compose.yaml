@@ -11,3 +11,8 @@ services:
       - "9874:9874"
       - "5901:5900"
       - "5908:5908"
+  arch-i3:
+    build: ./arch-i3
+    container_name: arch-i3
+    ports:
+      - "9873:9873"
