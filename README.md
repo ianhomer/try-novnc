@@ -17,8 +17,8 @@ And visit <http://localhost:9876/vnc.html>
 
 See container logs
 
-    docker logs novnc
+    docker logs arch-fluxbox
 
 Connect to container
 
-    docker exec -it novnc bash
+    docker exec -it arch-fluxbox bash

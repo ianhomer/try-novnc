@@ -1,7 +1,11 @@
-version: '3'
 services:
   debian-fluxbox:
     build: ./debian-fluxbox
     container_name: debian-fluxbox
     ports:
       - "9876:9876"
+  arch-fluxbox:
+    build: ./arch-fluxbox
+    container_name: arch-fluxbox
+    ports:
+      - "9875:9875"
