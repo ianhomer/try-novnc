@@ -17,8 +17,8 @@ RUN apt-get install -y \
       x11vnc \
       xvfb
 
-RUN apt-get install -y \
-      vim
+RUN apt-get install -y vim
+RUN apt-get install -y procps
 
 ENV HOME=/root \
     DEBIAN_FRONTEND=noninteractive \
