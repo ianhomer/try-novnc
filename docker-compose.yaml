@@ -1,14 +1,7 @@
 version: '3'
 services:
-  novnc:
-    build: ./novnc
-    container_name: novnc
-    environment:
-      - DISPLAY_WIDTH=800
-      - DISPLAY_HEIGHT=600
+  debian-fluxbox:
+    build: ./debian-fluxbox
+    container_name: debian-fluxbox
     ports:
       - "9876:9876"
-    networks:
-      - novnc
-networks:
-  novnc:

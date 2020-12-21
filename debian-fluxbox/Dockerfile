@@ -23,8 +23,8 @@ ENV HOME=/root \
     LANGUAGE=en_GB.UTF-8 \
     LC_ALL=C.UTF-8 \
     DISPLAY=:0.0 \
-    DISPLAY_WIDTH=500 \
-    DISPLAY_HEIGHT=300
+    DISPLAY_WIDTH=800 \
+    DISPLAY_HEIGHT=600
 
 COPY . /service
 CMD ["/service/entrypoint.sh"]
