@@ -29,7 +29,6 @@ ENV HOME=/root \
     DISPLAY_WIDTH=800 \
     DISPLAY_HEIGHT=600
 
-COPY . /service
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 CMD ["/usr/bin/supervisord"]
