@@ -17,6 +17,9 @@ RUN apt-get install -y \
       x11vnc \
       xvfb
 
+RUN apt-get install -y \
+      vim
+
 ENV HOME=/root \
     DEBIAN_FRONTEND=noninteractive \
     LANG=en_GB.UTF-8 \
@@ -27,5 +30,7 @@ ENV HOME=/root \
     DISPLAY_HEIGHT=600
 
 COPY . /service
-CMD ["/service/entrypoint.sh"]
+COPY supervisord.conf /etc/supervisor/supervisord.conf
+
+CMD ["/usr/bin/supervisord"]
 EXPOSE 9876
