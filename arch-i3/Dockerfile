@@ -13,7 +13,7 @@ RUN pacman -Syu --noconfirm \
 # User set up
 RUN mkdir /app
 RUN groupadd us && \
-    useradd -m -g us me
+    useradd -m -d /app -g us me
 RUN echo "me ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/me
 
 RUN chown -R me:us /app
@@ -70,7 +70,8 @@ RUN pacman -S --noconfirm --needed \
       terminus-font \
       ttf-font-awesome
 
-ENV HOME=/home/me \
+USER root
+ENV HOME=/app \
     LANG=en_GB.UTF-8 \
     LANGUAGE=en_GB.UTF-8 \
     DISPLAY=:0.0 \
@@ -79,6 +80,6 @@ ENV HOME=/home/me \
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 COPY 10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf
-COPY .xinitrc /home/me/.xinitrc
+COPY .xinitrc /app/.xinitrc
 CMD ["/usr/bin/supervisord","-c", "/etc/supervisor/supervisord.conf"]
 EXPOSE 9876
