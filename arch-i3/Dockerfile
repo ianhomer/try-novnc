@@ -58,12 +58,12 @@ RUN pacman -Syu --noconfirm \
 RUN pacman -Syu --noconfirm \
       i3
 
+USER root
 WORKDIR /app
 ENV HOME=/app \
-    LANG=en_GB.UTF-8 \
-    LANGUAGE=en_GB.UTF-8 \
     DISPLAY=:0.0
 
+COPY Xwrapper.config /etc/X11/
 COPY supervisord.conf /app/
 COPY .xinitrc /app/
 RUN mkdir -p /app/.config/i3
