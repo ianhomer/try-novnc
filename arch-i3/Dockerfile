@@ -1,17 +1,19 @@
 FROM archlinux:latest
 
 # Base arch install
+#
+# sudo, binutils and fakeroot => makepkg install of novnc
 RUN pacman -Syu --noconfirm \
       archlinux-keyring \
-      base-devel \
+      binutils \
+      fakeroot \
       git \
-      net-tools \
       python-pip \
+      sudo \
       supervisor \
       vim
 
 # User set up
-RUN mkdir /app
 RUN groupadd us && \
     useradd -m -d /app -g us me
 RUN echo "me ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/me
@@ -49,7 +51,6 @@ RUN pacman -Syu --noconfirm \
       kitty \
       ttf-inconsolata \
       xf86-video-dummy \
-      xorg-apps \
       xorg-server \
       xorg-xinit
 
