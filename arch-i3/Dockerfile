@@ -18,17 +18,6 @@ RUN echo "me ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/me
 
 RUN chown -R me:us /app
 
-# GUI set up
-RUN pacman -Syu --noconfirm \
-      conky \
-      kitty \
-      dmenu \
-      xf86-video-dummy \
-      xorg \
-      xorg-apps \
-      xorg-server \
-      xorg-xinit
-
 # VNC set up
 RUN pacman -Syu --noconfirm \
       x11vnc
@@ -52,6 +41,17 @@ WORKDIR /app/novnc
 RUN makepkg --noconfirm --syncdeps --rmdeps --install --clean
 
 USER root
+
+# GUI set up
+RUN pacman -Syu --noconfirm \
+      conky \
+      kitty \
+      dmenu \
+      xf86-video-dummy \
+      xorg \
+      xorg-apps \
+      xorg-server \
+      xorg-xinit
 
 # i3 window manager
 RUN pacman -Syu --noconfirm \
