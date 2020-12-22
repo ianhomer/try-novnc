@@ -22,6 +22,8 @@ RUN chown -R me:us /app
 RUN pacman -Syu --noconfirm \
       x11vnc
 
+COPY 10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf
+
 # Web sockify dependency recommendation
 RUN pip install numpy
 
@@ -44,9 +46,8 @@ USER root
 
 # GUI set up
 RUN pacman -Syu --noconfirm \
-      conky \
       kitty \
-      dmenu \
+      ttf-inconsolata \
       xf86-video-dummy \
       xorg \
       xorg-apps \
@@ -57,17 +58,13 @@ RUN pacman -Syu --noconfirm \
 RUN pacman -Syu --noconfirm \
       i3
 
-RUN pacman -S --noconfirm --needed \
-      ttf-inconsolata
-
 WORKDIR /app
 ENV HOME=/app \
     LANG=en_GB.UTF-8 \
     LANGUAGE=en_GB.UTF-8 \
     DISPLAY=:0.0
 
-COPY supervisord.conf /etc/supervisor/supervisord.conf
-COPY 10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf
-COPY .xinitrc /app/.xinitrc
-CMD ["/usr/bin/supervisord","-c", "/etc/supervisor/supervisord.conf"]
+COPY supervisord.conf /app/
+COPY .xinitrc /app/
+CMD ["/usr/bin/supervisord","-c", "/app/supervisord.conf"]
 EXPOSE 9876
