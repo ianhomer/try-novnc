@@ -53,7 +53,4 @@ ENV HOME=/root \
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 CMD ["/usr/bin/supervisord","-c", "/etc/supervisor/supervisord.conf"]
 EXPOSE 9874
-EXPOSE 5908
-EXPOSE 5900
-
 

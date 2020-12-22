@@ -32,4 +32,4 @@ ENV HOME=/root \
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 CMD ["/usr/bin/supervisord"]
-EXPOSE 9876
+EXPOSE 9873

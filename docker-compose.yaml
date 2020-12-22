@@ -3,16 +3,14 @@ services:
     build: ./debian-fluxbox
     container_name: debian-fluxbox
     ports:
-      - "9876:9876"
+      - "9873:9873"
   arch-fluxbox:
     build: ./arch-fluxbox
     container_name: arch-fluxbox
     ports:
       - "9874:9874"
-      - "5901:5900"
-      - "5908:5908"
   arch-i3:
     build: ./arch-i3
     container_name: arch-i3
     ports:
-      - "9873:9873"
+      - "9876:9876"

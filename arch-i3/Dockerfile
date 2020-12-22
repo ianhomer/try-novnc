@@ -81,4 +81,4 @@ COPY supervisord.conf /etc/supervisor/supervisord.conf
 COPY 10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf
 COPY .xinitrc /home/me/.xinitrc
 CMD ["/usr/bin/supervisord","-c", "/etc/supervisor/supervisord.conf"]
-EXPOSE 9873
+EXPOSE 9876
