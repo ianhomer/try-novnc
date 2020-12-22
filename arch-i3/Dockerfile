@@ -1,44 +1,44 @@
 FROM archlinux:latest
 
-# Base arch
+# Base arch install
 RUN pacman -Syu --noconfirm \
       archlinux-keyring \
       base-devel \
       git \
       net-tools \
       python-pip \
+      supervisor \
       vim
 
-# Web sockify recommendation
-RUN pip install numpy
+# User set up
+RUN mkdir /app
+RUN groupadd us && \
+    useradd -m -g us me
+RUN echo "me ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/me
 
-# Windows base
+RUN chown -R me:us /app
+
+# GUI set up
 RUN pacman -Syu --noconfirm \
       conky \
+      kitty \
       dmenu \
+      xf86-video-dummy \
       xorg \
       xorg-apps \
       xorg-server \
       xorg-xinit
 
-# VNC layer
+# VNC set up
 RUN pacman -Syu --noconfirm \
       x11vnc
 
-# Docker spin up
-RUN pacman -Syu --noconfirm \
-      supervisor
+# Web sockify dependency recommendation
+RUN pip install numpy
 
-RUN mkdir /app
-RUN groupadd admin && \
-    useradd -m -g admin admin
-RUN echo "admin ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/admin
+USER me
 
-RUN chown -R admin:admin /app
-
-USER admin
 WORKDIR /app
-
 RUN mkdir .gnupg && \
     touch .gnupg/gpg.conf && \
     echo "keyserver-options auto-key-retrieve" > .gnupg/gpg.conf
@@ -54,13 +54,9 @@ RUN makepkg --noconfirm --syncdeps --rmdeps --install --clean
 USER root
 WORKDIR /app
 
-# i3
+# i3 window manager
 RUN pacman -Syu --noconfirm \
       i3
-
-# experiments
-RUN pacman -Syu --noconfirm \
-      xf86-video-dummy
 
 RUN pacman -S --noconfirm --needed \
       noto-fonts \
@@ -73,9 +69,6 @@ RUN pacman -S --noconfirm --needed \
       ttf-roboto \
       terminus-font \
       ttf-font-awesome
-
-RUN pacman -S --noconfirm \
-      kitty
 
 ENV HOME=/root \
     LANG=en_GB.UTF-8 \
