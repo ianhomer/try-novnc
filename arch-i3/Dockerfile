@@ -18,7 +18,7 @@ RUN pacman -Syu --noconfirm \
       dmenu \
       xorg \
       xorg-apps \
-      xorg-server-xvfb \
+      xorg-server \
       xorg-xinit
 
 # VNC layer
@@ -58,6 +58,25 @@ WORKDIR /app
 RUN pacman -Syu --noconfirm \
       i3
 
+# experiments
+RUN pacman -Syu --noconfirm \
+      xf86-video-dummy
+
+RUN pacman -S --noconfirm --needed \ 
+  noto-fonts \
+  ttf-ubuntu-font-family \
+  ttf-dejavu \
+  ttf-freefont \
+  ttf-liberation \
+  ttf-droid \
+  ttf-inconsolata \
+  ttf-roboto \
+  terminus-font \
+  ttf-font-awesome
+
+RUN pacman -S --noconfirm \
+  kitty
+
 ENV HOME=/root \
     LANG=en_GB.UTF-8 \
     LANGUAGE=en_GB.UTF-8 \
@@ -66,6 +85,9 @@ ENV HOME=/root \
     DISPLAY_HEIGHT=600
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
+COPY 10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf
+COPY .xinitrc /root/.xinitrc
+
 CMD ["/usr/bin/supervisord","-c", "/etc/supervisor/supervisord.conf"]
 EXPOSE 9873
 
