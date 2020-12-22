@@ -70,7 +70,7 @@ RUN pacman -S --noconfirm --needed \
       terminus-font \
       ttf-font-awesome
 
-ENV HOME=/root \
+ENV HOME=/home/me \
     LANG=en_GB.UTF-8 \
     LANGUAGE=en_GB.UTF-8 \
     DISPLAY=:0.0 \
@@ -79,6 +79,6 @@ ENV HOME=/root \
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 COPY 10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf
-COPY .xinitrc /root/.xinitrc
+COPY .xinitrc /home/me/.xinitrc
 CMD ["/usr/bin/supervisord","-c", "/etc/supervisor/supervisord.conf"]
 EXPOSE 9873
