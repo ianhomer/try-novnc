@@ -52,25 +52,15 @@ WORKDIR /app/novnc
 RUN makepkg --noconfirm --syncdeps --rmdeps --install --clean
 
 USER root
-WORKDIR /app
 
 # i3 window manager
 RUN pacman -Syu --noconfirm \
       i3
 
 RUN pacman -S --noconfirm --needed \
-      noto-fonts \
-      ttf-ubuntu-font-family \
-      ttf-dejavu \
-      ttf-freefont \
-      ttf-liberation \
-      ttf-droid \
-      ttf-inconsolata \
-      ttf-roboto \
-      terminus-font \
-      ttf-font-awesome
+      ttf-inconsolata
 
-USER root
+WORKDIR /app
 ENV HOME=/app \
     LANG=en_GB.UTF-8 \
     LANGUAGE=en_GB.UTF-8 \
