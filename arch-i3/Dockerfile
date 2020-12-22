@@ -49,7 +49,6 @@ RUN pacman -Syu --noconfirm \
       kitty \
       ttf-inconsolata \
       xf86-video-dummy \
-      xorg \
       xorg-apps \
       xorg-server \
       xorg-xinit
