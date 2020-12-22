@@ -79,6 +79,9 @@ ENV HOME=/app \
     QT_X11_NO_MITSHM=1 \
     QT_GRAPHICSSYSTEM=native
 
+RUN mkdir /app/.vnc && \
+      echo `date +%s | sha256sum | base64 | head -c 32` > /app/.vnc/passwdfile
+
 COPY sshd_config /etc/ssh/
 COPY Xwrapper.config /etc/X11/
 COPY supervisord.conf /app/
