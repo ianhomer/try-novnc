@@ -62,20 +62,20 @@ RUN pacman -Syu --noconfirm \
 RUN pacman -Syu --noconfirm \
       xf86-video-dummy
 
-RUN pacman -S --noconfirm --needed \ 
-  noto-fonts \
-  ttf-ubuntu-font-family \
-  ttf-dejavu \
-  ttf-freefont \
-  ttf-liberation \
-  ttf-droid \
-  ttf-inconsolata \
-  ttf-roboto \
-  terminus-font \
-  ttf-font-awesome
+RUN pacman -S --noconfirm --needed \
+      noto-fonts \
+      ttf-ubuntu-font-family \
+      ttf-dejavu \
+      ttf-freefont \
+      ttf-liberation \
+      ttf-droid \
+      ttf-inconsolata \
+      ttf-roboto \
+      terminus-font \
+      ttf-font-awesome
 
 RUN pacman -S --noconfirm \
-  kitty
+      kitty
 
 ENV HOME=/root \
     LANG=en_GB.UTF-8 \
@@ -89,6 +89,3 @@ COPY 10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf
 COPY .xinitrc /root/.xinitrc
 CMD ["/usr/bin/supervisord","-c", "/etc/supervisor/supervisord.conf"]
 EXPOSE 9873
-
-
-
