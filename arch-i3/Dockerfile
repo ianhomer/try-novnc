@@ -32,8 +32,6 @@ RUN chown -R me:us /app
 RUN pacman -Syu --noconfirm \
       x11vnc
 
-COPY 10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf
-
 #
 # Web sockify dependency recommendation
 #
@@ -72,7 +70,7 @@ RUN pacman -Syu --noconfirm \
 RUN pacman -Syu --noconfirm \
       i3
 
-USER root
+USER me
 WORKDIR /app
 ENV HOME=/app \
     DISPLAY=:0.0 \
@@ -82,6 +80,7 @@ ENV HOME=/app \
 RUN mkdir /app/.vnc && \
       echo `date +%s | sha256sum | base64 | head -c 32` > /app/.vnc/passwdfile
 
+COPY 10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf
 COPY sshd_config /etc/ssh/
 COPY Xwrapper.config /etc/X11/
 COPY supervisord.conf /app/
