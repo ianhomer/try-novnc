@@ -66,5 +66,7 @@ ENV HOME=/app \
 
 COPY supervisord.conf /app/
 COPY .xinitrc /app/
+RUN mkdir -p /app/.config/i3
+COPY i3.config /app/.config/i3/config
 CMD ["/usr/bin/supervisord","-c", "/app/supervisord.conf"]
 EXPOSE 9876
