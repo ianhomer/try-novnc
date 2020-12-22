@@ -29,15 +29,15 @@ RUN pacman -Syu --noconfirm \
 RUN pacman -Syu --noconfirm \
       supervisor
 
+RUN mkdir /app
 RUN groupadd admin && \
     useradd -m -g admin admin
 RUN echo "admin ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/admin
 
-RUN mkdir /app
 RUN chown -R admin:admin /app
 
 USER admin
-WORKDIR /home/admin
+WORKDIR /app
 
 RUN mkdir .gnupg && \
     touch .gnupg/gpg.conf && \
@@ -87,7 +87,6 @@ ENV HOME=/root \
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 COPY 10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf
 COPY .xinitrc /root/.xinitrc
-
 CMD ["/usr/bin/supervisord","-c", "/etc/supervisor/supervisord.conf"]
 EXPOSE 9873
 

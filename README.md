@@ -11,7 +11,7 @@ And visit <http://localhost:9876/vnc.html>
 
 ## rebuild
 
-    docker-compose up -d --build
+    docker-compose up -d --build arch-i3
 
 ## troubleshoot
 
