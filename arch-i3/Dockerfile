@@ -74,9 +74,7 @@ USER root
 ENV HOME=/app \
     LANG=en_GB.UTF-8 \
     LANGUAGE=en_GB.UTF-8 \
-    DISPLAY=:0.0 \
-    DISPLAY_WIDTH=800 \
-    DISPLAY_HEIGHT=600
+    DISPLAY=:0.0
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 COPY 10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf
