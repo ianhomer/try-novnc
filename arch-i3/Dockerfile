@@ -70,6 +70,13 @@ RUN pacman -Syu --noconfirm \
 RUN pacman -Syu --noconfirm \
       i3
 
+#
+# i3 extras
+#
+RUN pacman -Syu --noconfirm \
+      rofi \
+      xsel
+
 USER me
 WORKDIR /app
 ENV HOME=/app \
@@ -78,10 +85,10 @@ ENV HOME=/app \
     QT_GRAPHICSSYSTEM=native
 
 RUN mkdir /app/.vnc && \
-      echo `date +%s | sha256sum | base64 | head -c 32` > /app/.vnc/passwdfile
+      echo `date +%s | sha256sum | base64 | head -c 32` \
+      > /app/.vnc/passwdfile
 
-COPY 10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf
-COPY sshd_config /etc/ssh/
+COPY 10-headless.conf /etc/X11/xorg.conf.d/
 COPY Xwrapper.config /etc/X11/
 COPY supervisord.conf /app/
 COPY .xinitrc /app/
